@@ -1,0 +1,12 @@
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\bin\Debug\netcoreapp2.0\CinemaWebIdentitySystem.deps.json
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\bin\Debug\netcoreapp2.0\CinemaWebIdentitySystem.runtimeconfig.json
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\bin\Debug\netcoreapp2.0\CinemaWebIdentitySystem.runtimeconfig.dev.json
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\bin\Debug\netcoreapp2.0\CinemaWebIdentitySystem.dll
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\bin\Debug\netcoreapp2.0\CinemaWebIdentitySystem.pdb
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\CinemaWebIdentitySystem.csprojAssemblyReference.cache
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\CinemaWebIdentitySystem.csproj.CoreCompileInputs.cache
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\CinemaWebIdentitySystem.AssemblyInfoInputs.cache
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\CinemaWebIdentitySystem.AssemblyInfo.cs
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\CinemaWebIdentitySystem.dll
+C:\Users\sidne\source\repos\CinemaWebIdentitySystem\CinemaWebIdentitySystem\obj\Debug\netcoreapp2.0\CinemaWebIdentitySystem.pdb
