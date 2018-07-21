@@ -9,10 +9,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using CinemaWebIdentitySystem.Models;
 using CinemaWebIdentitySystem.Models.ManageViewModels;
 using CinemaWebIdentitySystem.Services;
+using CinemaWebIdentitySystem.Data.Entities;
 
 namespace CinemaWebIdentitySystem.Controllers
 {

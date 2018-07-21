@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CinemaWebIdentitySystem.Models
+namespace CinemaWebIdentitySystem.Data.Entities
 {
     public class Filme
     {
@@ -14,7 +14,7 @@ namespace CinemaWebIdentitySystem.Models
         [Display(Name = "Título")]
         [StringLength(60, MinimumLength = 1)]
         public string Titulo { get; set; }
-
+        
         public byte[] Imagem { get; set; }
 
         [Required]

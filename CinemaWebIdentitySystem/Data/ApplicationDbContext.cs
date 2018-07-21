@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CinemaWebIdentitySystem.Models;
+using CinemaWebIdentitySystem.Data.Entities;
 
 namespace CinemaWebIdentitySystem.Data
 {
@@ -25,6 +22,7 @@ namespace CinemaWebIdentitySystem.Data
             {
                 fk.DeleteBehavior = DeleteBehavior.Restrict;
             }
+            
 
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.

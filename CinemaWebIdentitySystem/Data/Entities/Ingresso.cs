@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CinemaWebIdentitySystem.Models
+namespace CinemaWebIdentitySystem.Data.Entities
 {
     public class Ingresso
     {
