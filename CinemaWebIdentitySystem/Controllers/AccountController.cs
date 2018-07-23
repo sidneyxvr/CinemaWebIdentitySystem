@@ -216,7 +216,7 @@ namespace CinemaWebIdentitySystem.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Nome = model.Nome, UserName = model.Email, DataNascimento = model.DataNascimento, Email = model.Email, Estudante = model.Estudante };
+                var user = new ApplicationUser { Nome = model.Nome, Sobrenome = model.Sobrenome, UserName = model.Email, DataNascimento = model.DataNascimento, Email = model.Email, Estudante = model.Estudante };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

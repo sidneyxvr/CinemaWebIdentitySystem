@@ -20,14 +20,16 @@ namespace CinemaWebIdentitySystem.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.ApplicationUser", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<bool>("Ativa");
+                    b.Property<bool>("Ativa")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -46,7 +48,8 @@ namespace CinemaWebIdentitySystem.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("Nome")
-                        .HasMaxLength(50);
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -61,6 +64,10 @@ namespace CinemaWebIdentitySystem.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("Sobrenome")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -80,16 +87,18 @@ namespace CinemaWebIdentitySystem.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Assento", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Assento", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativa");
+                    b.Property<bool>("Ativa")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<string>("Fila")
                         .IsRequired()
-                        .HasMaxLength(3);
+                        .HasColumnType("varchar(3)");
 
                     b.Property<int>("Numero");
 
@@ -99,80 +108,90 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.HasIndex("SalaId");
 
-                    b.ToTable("Assentos");
+                    b.ToTable("Assento");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Cinema", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Cinema", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativa");
+                    b.Property<bool>("Ativa")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<string>("Bairro")
-                        .HasMaxLength(50);
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Cep");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("Estado");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("Numero");
 
                     b.Property<string>("Rua")
-                        .HasMaxLength(50);
+                        .IsRequired()
+                        .HasColumnType("varchar(70)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas");
+                    b.ToTable("Cinema");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Filme", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Filme", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativa");
+                    b.Property<bool>("Ativa")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<int>("Classificacao");
 
                     b.Property<int>("GeneroId");
 
-                    b.Property<byte[]>("Imagem");
+                    b.Property<string>("Imagem")
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Titulo")
                         .IsRequired()
-                        .HasMaxLength(60);
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
                     b.HasIndex("GeneroId");
 
-                    b.ToTable("Filmes");
+                    b.ToTable("Filme");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Genero", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Genero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasMaxLength(25);
+                        .HasColumnType("varchar(100)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Generos");
+                    b.ToTable("Genero");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Ingresso", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Ingresso", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -193,21 +212,23 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.HasIndex("VendaId");
 
-                    b.ToTable("Ingressos");
+                    b.ToTable("Ingresso");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Sala", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Sala", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativa");
+                    b.Property<bool>("Ativa")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<int>("CinemaId");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasMaxLength(20);
+                        .HasColumnType("varchar(5)");
 
                     b.Property<int>("QuantidadeAssentos");
 
@@ -215,15 +236,17 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.HasIndex("CinemaId");
 
-                    b.ToTable("Salas");
+                    b.ToTable("Sala");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Sessao", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Sessao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativa");
+                    b.Property<bool>("Ativa")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<int>("CinemaId");
 
@@ -231,7 +254,8 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.Property<DateTime>("Horario");
 
-                    b.Property<decimal>("Preco");
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(6,2)");
 
                     b.Property<int>("SalaId");
 
@@ -243,10 +267,10 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.HasIndex("SalaId");
 
-                    b.ToTable("Sessoes");
+                    b.ToTable("Sessao");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Venda", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Venda", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -257,15 +281,14 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.Property<DateTime>("Data");
 
-                    b.Property<int>("Inteira");
-
-                    b.Property<int>("Meia");
+                    b.Property<int>("Quantidade");
 
                     b.Property<int>("SessaoId");
 
                     b.Property<string>("UsuarioId");
 
-                    b.Property<decimal>("ValorTotal");
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("decimal(6,2)");
 
                     b.HasKey("Id");
 
@@ -273,7 +296,7 @@ namespace CinemaWebIdentitySystem.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Vendas");
+                    b.ToTable("Venda");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -384,76 +407,77 @@ namespace CinemaWebIdentitySystem.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Assento", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Assento", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.Sala", "Sala")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Sala", "Sala")
                         .WithMany("Assentos")
                         .HasForeignKey("SalaId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Filme", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Filme", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.Genero", "Genero")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Genero", "Genero")
                         .WithMany("Filmes")
                         .HasForeignKey("GeneroId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Ingresso", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Ingresso", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.Assento", "Assento")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Assento", "Assento")
                         .WithMany("Ingressos")
                         .HasForeignKey("AssentoId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CinemaWebIdentitySystem.Models.Sessao", "Sessao")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Sessao", "Sessao")
                         .WithMany("Ingressos")
                         .HasForeignKey("SessaoId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CinemaWebIdentitySystem.Models.Venda", "Venda")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Venda", "Venda")
                         .WithMany("Ingressos")
                         .HasForeignKey("VendaId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Sala", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Sala", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.Cinema", "Cinema")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Cinema", "Cinema")
                         .WithMany("Salas")
                         .HasForeignKey("CinemaId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Sessao", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Sessao", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.Cinema", "Cinema")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Cinema", "Cinema")
                         .WithMany("Sessoes")
                         .HasForeignKey("CinemaId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CinemaWebIdentitySystem.Models.Filme", "Filme")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Filme", "Filme")
                         .WithMany("Sessoes")
                         .HasForeignKey("FilmeId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CinemaWebIdentitySystem.Models.Sala", "Sala")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Sala", "Sala")
                         .WithMany("Sessoes")
                         .HasForeignKey("SalaId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("CinemaWebIdentitySystem.Models.Venda", b =>
+            modelBuilder.Entity("CinemaWebIdentitySystem.Data.Entities.Venda", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.Sessao", "Sessao")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.Sessao", "Sessao")
                         .WithMany("Vendas")
                         .HasForeignKey("SessaoId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CinemaWebIdentitySystem.Models.ApplicationUser", "Usuario")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.ApplicationUser", "Usuario")
                         .WithMany("Vendas")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -466,7 +490,7 @@ namespace CinemaWebIdentitySystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.ApplicationUser")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -474,7 +498,7 @@ namespace CinemaWebIdentitySystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.ApplicationUser")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -487,7 +511,7 @@ namespace CinemaWebIdentitySystem.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CinemaWebIdentitySystem.Models.ApplicationUser")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -495,7 +519,7 @@ namespace CinemaWebIdentitySystem.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CinemaWebIdentitySystem.Models.ApplicationUser")
+                    b.HasOne("CinemaWebIdentitySystem.Data.Entities.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

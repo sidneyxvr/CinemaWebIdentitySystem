@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CinemaWebIdentitySystem.Data.Entities;
+using CinemaWebIdentitySystem.Data.EntityConfig;
 
 namespace CinemaWebIdentitySystem.Data
 {
@@ -14,20 +15,17 @@ namespace CinemaWebIdentitySystem.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            var cascadeFKs = builder.Model.GetEntityTypes()
-                             .SelectMany(t => t.GetForeignKeys())
-                             .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
-
-            foreach (var fk in cascadeFKs)
-            {
-                fk.DeleteBehavior = DeleteBehavior.Restrict;
-            }
-            
+            builder.ApplyConfiguration(new FilmeEntityConfig());
+            builder.ApplyConfiguration(new GeneroEntityConfig());
+            builder.ApplyConfiguration(new UserEntityConfig());
+            builder.ApplyConfiguration(new AssentoEntityConfig());
+            builder.ApplyConfiguration(new CinemaEntityConfig());
+            builder.ApplyConfiguration(new IngressoEntityConfig());
+            builder.ApplyConfiguration(new SalaEntityConfig());
+            builder.ApplyConfiguration(new SessaoEntityConfig());
+            builder.ApplyConfiguration(new VendaEntityConfig());
 
             base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
         }
 
         public DbSet<Assento> Assentos { get; set; }

@@ -17,6 +17,11 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Sobrenome"></label>
+                <input asp-for="Sobrenome" class="form-control" />
+                <span asp-validation-for="Sobrenome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="DataNascimento"></label>
                 <input asp-for="DataNascimento" class="form-control" />
                 <span asp-validation-for="DataNascimento" class="text-danger"></span>
@@ -37,9 +42,9 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Estudante"></label>?
-                <input asp-for="Estudante" type="radio" value="true"/> Sim
-                <input asp-for="Estudante" type="radio" value="false"/> Não
+                <label asp-for="Estudante"></label>
+                <input asp-for="Estudante" type="radio" value="true" /> Sim
+                <input asp-for="Estudante" type="radio" value="false" /> Não
             </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>

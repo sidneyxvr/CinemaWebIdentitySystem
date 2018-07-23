@@ -29,7 +29,7 @@ namespace CinemaWebIdentitySystem.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Ativa = table.Column<bool>(nullable: false),
+                    Ativa = table.Column<bool>(nullable: false, defaultValue: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     DataNascimento = table.Column<DateTime>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -37,13 +37,14 @@ namespace CinemaWebIdentitySystem.Migrations
                     Estudante = table.Column<bool>(nullable: false),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    Nome = table.Column<string>(maxLength: 50, nullable: true),
+                    Nome = table.Column<string>(type: "varchar(100)", nullable: false),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    Sobrenome = table.Column<string>(type: "varchar(100)", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true)
                 },
@@ -53,36 +54,36 @@ namespace CinemaWebIdentitySystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cinemas",
+                name: "Cinema",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ativa = table.Column<bool>(nullable: false),
-                    Bairro = table.Column<string>(maxLength: 50, nullable: true),
+                    Ativa = table.Column<bool>(nullable: false, defaultValue: true),
+                    Bairro = table.Column<string>(type: "varchar(50)", nullable: false),
                     Cep = table.Column<string>(nullable: true),
-                    Cidade = table.Column<string>(maxLength: 50, nullable: false),
+                    Cidade = table.Column<string>(type: "varchar(50)", nullable: false),
                     Estado = table.Column<int>(nullable: false),
-                    Nome = table.Column<string>(maxLength: 50, nullable: false),
+                    Nome = table.Column<string>(type: "varchar(50)", nullable: false),
                     Numero = table.Column<int>(nullable: false),
-                    Rua = table.Column<string>(maxLength: 50, nullable: true)
+                    Rua = table.Column<string>(type: "varchar(70)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cinemas", x => x.Id);
+                    table.PrimaryKey("PK_Cinema", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Generos",
+                name: "Genero",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Descricao = table.Column<string>(maxLength: 25, nullable: false)
+                    Descricao = table.Column<string>(type: "varchar(100)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Generos", x => x.Id);
+                    table.PrimaryKey("PK_Genero", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,110 +193,110 @@ namespace CinemaWebIdentitySystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Salas",
+                name: "Sala",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ativa = table.Column<bool>(nullable: false),
+                    Ativa = table.Column<bool>(nullable: false, defaultValue: true),
                     CinemaId = table.Column<int>(nullable: false),
-                    Nome = table.Column<string>(maxLength: 20, nullable: false),
+                    Nome = table.Column<string>(type: "varchar(5)", nullable: false),
                     QuantidadeAssentos = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Salas", x => x.Id);
+                    table.PrimaryKey("PK_Sala", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Salas_Cinemas_CinemaId",
+                        name: "FK_Sala_Cinema_CinemaId",
                         column: x => x.CinemaId,
-                        principalTable: "Cinemas",
+                        principalTable: "Cinema",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Filmes",
+                name: "Filme",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ativa = table.Column<bool>(nullable: false),
+                    Ativa = table.Column<bool>(nullable: false, defaultValue: true),
                     Classificacao = table.Column<int>(nullable: false),
                     GeneroId = table.Column<int>(nullable: false),
-                    Imagem = table.Column<byte[]>(nullable: true),
-                    Titulo = table.Column<string>(maxLength: 60, nullable: false)
+                    Imagem = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
+                    Titulo = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Filmes", x => x.Id);
+                    table.PrimaryKey("PK_Filme", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Filmes_Generos_GeneroId",
+                        name: "FK_Filme_Genero_GeneroId",
                         column: x => x.GeneroId,
-                        principalTable: "Generos",
+                        principalTable: "Genero",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Assentos",
+                name: "Assento",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ativa = table.Column<bool>(nullable: false),
-                    Fila = table.Column<string>(maxLength: 3, nullable: false),
+                    Ativa = table.Column<bool>(nullable: false, defaultValue: true),
+                    Fila = table.Column<string>(type: "varchar(3)", nullable: false),
                     Numero = table.Column<int>(nullable: false),
                     SalaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Assentos", x => x.Id);
+                    table.PrimaryKey("PK_Assento", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Assentos_Salas_SalaId",
+                        name: "FK_Assento_Sala_SalaId",
                         column: x => x.SalaId,
-                        principalTable: "Salas",
+                        principalTable: "Sala",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sessoes",
+                name: "Sessao",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ativa = table.Column<bool>(nullable: false),
+                    Ativa = table.Column<bool>(nullable: false, defaultValue: true),
                     CinemaId = table.Column<int>(nullable: false),
                     FilmeId = table.Column<int>(nullable: false),
                     Horario = table.Column<DateTime>(nullable: false),
-                    Preco = table.Column<decimal>(nullable: false),
+                    Preco = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
                     SalaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sessoes", x => x.Id);
+                    table.PrimaryKey("PK_Sessao", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sessoes_Cinemas_CinemaId",
+                        name: "FK_Sessao_Cinema_CinemaId",
                         column: x => x.CinemaId,
-                        principalTable: "Cinemas",
+                        principalTable: "Cinema",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Sessoes_Filmes_FilmeId",
+                        name: "FK_Sessao_Filme_FilmeId",
                         column: x => x.FilmeId,
-                        principalTable: "Filmes",
+                        principalTable: "Filme",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Sessoes_Salas_SalaId",
+                        name: "FK_Sessao_Sala_SalaId",
                         column: x => x.SalaId,
-                        principalTable: "Salas",
+                        principalTable: "Sala",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vendas",
+                name: "Venda",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -303,23 +304,22 @@ namespace CinemaWebIdentitySystem.Migrations
                     ApplicationUserId = table.Column<Guid>(nullable: false),
                     Cartao = table.Column<int>(nullable: false),
                     Data = table.Column<DateTime>(nullable: false),
-                    Inteira = table.Column<int>(nullable: false),
-                    Meia = table.Column<int>(nullable: false),
+                    Quantidade = table.Column<int>(nullable: false),
                     SessaoId = table.Column<int>(nullable: false),
                     UsuarioId = table.Column<string>(nullable: true),
-                    ValorTotal = table.Column<decimal>(nullable: false)
+                    ValorTotal = table.Column<decimal>(type: "decimal(6,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vendas", x => x.Id);
+                    table.PrimaryKey("PK_Venda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vendas_Sessoes_SessaoId",
+                        name: "FK_Venda_Sessao_SessaoId",
                         column: x => x.SessaoId,
-                        principalTable: "Sessoes",
+                        principalTable: "Sessao",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Vendas_AspNetUsers_UsuarioId",
+                        name: "FK_Venda_AspNetUsers_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -327,7 +327,7 @@ namespace CinemaWebIdentitySystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ingressos",
+                name: "Ingresso",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -339,23 +339,23 @@ namespace CinemaWebIdentitySystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingressos", x => x.Id);
+                    table.PrimaryKey("PK_Ingresso", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ingressos_Assentos_AssentoId",
+                        name: "FK_Ingresso_Assento_AssentoId",
                         column: x => x.AssentoId,
-                        principalTable: "Assentos",
+                        principalTable: "Assento",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ingressos_Sessoes_SessaoId",
+                        name: "FK_Ingresso_Sessao_SessaoId",
                         column: x => x.SessaoId,
-                        principalTable: "Sessoes",
+                        principalTable: "Sessao",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Ingressos_Vendas_VendaId",
+                        name: "FK_Ingresso_Venda_VendaId",
                         column: x => x.VendaId,
-                        principalTable: "Vendas",
+                        principalTable: "Venda",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -400,58 +400,58 @@ namespace CinemaWebIdentitySystem.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Assentos_SalaId",
-                table: "Assentos",
+                name: "IX_Assento_SalaId",
+                table: "Assento",
                 column: "SalaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Filmes_GeneroId",
-                table: "Filmes",
+                name: "IX_Filme_GeneroId",
+                table: "Filme",
                 column: "GeneroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingressos_AssentoId",
-                table: "Ingressos",
+                name: "IX_Ingresso_AssentoId",
+                table: "Ingresso",
                 column: "AssentoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingressos_SessaoId",
-                table: "Ingressos",
+                name: "IX_Ingresso_SessaoId",
+                table: "Ingresso",
                 column: "SessaoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingressos_VendaId",
-                table: "Ingressos",
+                name: "IX_Ingresso_VendaId",
+                table: "Ingresso",
                 column: "VendaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Salas_CinemaId",
-                table: "Salas",
+                name: "IX_Sala_CinemaId",
+                table: "Sala",
                 column: "CinemaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessoes_CinemaId",
-                table: "Sessoes",
+                name: "IX_Sessao_CinemaId",
+                table: "Sessao",
                 column: "CinemaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessoes_FilmeId",
-                table: "Sessoes",
+                name: "IX_Sessao_FilmeId",
+                table: "Sessao",
                 column: "FilmeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessoes_SalaId",
-                table: "Sessoes",
+                name: "IX_Sessao_SalaId",
+                table: "Sessao",
                 column: "SalaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vendas_SessaoId",
-                table: "Vendas",
+                name: "IX_Venda_SessaoId",
+                table: "Venda",
                 column: "SessaoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vendas_UsuarioId",
-                table: "Vendas",
+                name: "IX_Venda_UsuarioId",
+                table: "Venda",
                 column: "UsuarioId");
         }
 
@@ -473,34 +473,34 @@ namespace CinemaWebIdentitySystem.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Ingressos");
+                name: "Ingresso");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Assentos");
+                name: "Assento");
 
             migrationBuilder.DropTable(
-                name: "Vendas");
+                name: "Venda");
 
             migrationBuilder.DropTable(
-                name: "Sessoes");
+                name: "Sessao");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Filmes");
+                name: "Filme");
 
             migrationBuilder.DropTable(
-                name: "Salas");
+                name: "Sala");
 
             migrationBuilder.DropTable(
-                name: "Generos");
+                name: "Genero");
 
             migrationBuilder.DropTable(
-                name: "Cinemas");
+                name: "Cinema");
         }
     }
 }

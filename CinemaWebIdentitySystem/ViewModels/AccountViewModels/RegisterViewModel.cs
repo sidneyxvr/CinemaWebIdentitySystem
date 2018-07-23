@@ -9,8 +9,10 @@ namespace CinemaWebIdentitySystem.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Nome completo")]
         public string Nome { get; set; }
+
+        [Required]
+        public string Sobrenome { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
@@ -33,6 +35,7 @@ namespace CinemaWebIdentitySystem.Models.AccountViewModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
+        [Display(Name = "Estudante?")]
         public bool Estudante { get; set; }
     }
 }

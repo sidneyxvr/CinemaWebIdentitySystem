@@ -12,7 +12,14 @@ namespace CinemaWebIdentitySystem.AutoMapper
     {
         public ViewModelToEntityMappingProfile()
         {
-            CreateMap<FilmeViewModel, Filme>();   
+            CreateMap<FilmeViewModel, Filme>();
+            CreateMap<AssentoViewModel, Assento>();
+            CreateMap<CinemaViewModel, Cinema>();
+            CreateMap<GeneroViewModel, Genero>();
+            CreateMap<IngressoViewModel, Ingresso>();
+            CreateMap<SalaViewModel, Sala>();
+            CreateMap<SessaoViewModel, Sessao>();
+            CreateMap<VendaViewModel, Venda>();
         }
     }
 }

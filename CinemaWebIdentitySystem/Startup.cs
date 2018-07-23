@@ -62,8 +62,7 @@ namespace CinemaWebIdentitySystem
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-
-
+            
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
