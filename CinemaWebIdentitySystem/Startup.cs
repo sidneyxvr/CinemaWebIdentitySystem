@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using CinemaWebIdentitySystem.Data;
 using CinemaWebIdentitySystem.Services;
 using CinemaWebIdentitySystem.Data.Entities;
+using AutoMapper;
+using CinemaWebIdentitySystem.AutoMapper;
 
 namespace CinemaWebIdentitySystem
 {
@@ -29,6 +31,7 @@ namespace CinemaWebIdentitySystem
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -62,9 +65,11 @@ namespace CinemaWebIdentitySystem
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-            
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            
+            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
 
             services.AddMvc();
         }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CinemaWebIdentitySystem.Data.Entities;
 using CinemaWebIdentitySystem.Data.EntityConfig;
+using CinemaWebIdentitySystem.ViewModels;
 
 namespace CinemaWebIdentitySystem.Data
 {
@@ -36,5 +37,6 @@ namespace CinemaWebIdentitySystem.Data
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Sessao> Sessoes { get; set; }
         public DbSet<Venda> Vendas { get; set; }
+        public DbSet<CinemaWebIdentitySystem.ViewModels.GeneroViewModel> GeneroViewModel { get; set; }
     }
 }

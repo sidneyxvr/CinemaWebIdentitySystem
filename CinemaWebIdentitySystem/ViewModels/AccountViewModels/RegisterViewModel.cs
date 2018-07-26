@@ -8,6 +8,9 @@ namespace CinemaWebIdentitySystem.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+        [Key]
+        public Guid Id { get; set; }
+
         [Required]
         public string Nome { get; set; }
 

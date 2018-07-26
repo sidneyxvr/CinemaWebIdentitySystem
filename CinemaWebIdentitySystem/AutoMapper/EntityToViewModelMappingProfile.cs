@@ -16,6 +16,7 @@ namespace CinemaWebIdentitySystem.AutoMapper
             CreateMap<Sala, SalaViewModel>();
             CreateMap<Sessao, SessaoViewModel>();
             CreateMap<Venda, VendaViewModel>();
+
         }
     }
 }
